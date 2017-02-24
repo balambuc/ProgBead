@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1487954865 source:c:\users\bardo\github\progbead\0bead\vy9njn\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+
