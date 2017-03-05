@@ -26,3 +26,16 @@
 *.exe
 *.out
 *.app
+
+# LaTeX aux files
+*.log
+*.fdb_latexmk
+*.fls
+*.aux
+*.synctex.gz
+*.toc
+
+# Code::Blocks aux files
+*.cbp
+*.depend
+*.layout
