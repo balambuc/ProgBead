@@ -68,7 +68,7 @@ bool ReadData(int argc, char *argv[], vector<float> &t)
             if(argc>1)
                 fname = argv[1];
             else {
-                cout << "Adja meg a szöveges fájl nevét: ";
+                cout << "Adja meg a szoveges fajl nevet: ";
                 cin >> fname;
             }
             if (!ReadFromFile(fname, t)) return false;
