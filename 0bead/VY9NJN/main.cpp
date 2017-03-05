@@ -29,10 +29,8 @@ int main(int argc, char *argv[])
         if(!ReadData(argc, argv, t))
             continue;
 
-        // Megadott tömb kiírása
-        cout << endl << "A megadott homersekleteken (<";
+        // Megadott tömb kiírása olvasható formában
         WriteVector(t);
-        cout << ">) ";
 
         // Kiértékelés és kiíratás
         cout << CountDays(t)
@@ -47,7 +45,13 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
+//Feladat:      Adatbeolvasás lekoordinálása
+//Tevékenység:  Megkérdezi a felhasználótól, hogy milyen módon kívánja az adatokat bevinni.
+//              Ha fileból, akkor leellen?rzi, hogy nem lett-e a fájl neve paraméterként megadva a futtatás során.
+//Bemenõ adat:  int argc - futási paraméterek száma
+//              char **argv - futási paraméterek
+//Kimenõ adat:  vector<float> t
+//              bool ok - sikerült-e a beolvasás (visszatérési értékként)
 bool ReadData(int argc, char *argv[], vector<float> &t)
 {
     char ch;
@@ -118,7 +122,7 @@ bool ReadFromFile(const string &fname, vector<float> &t)
 //Kimenõ adat:  vector<float> t
 void ReadFromConsole(vector<float> &t)
 {
-    cout << "Kerem adja meg a napokon mert °C ertekeket szokozzel, vagy enterrel elvalasztva, majd adjon meg barmilyen nem szam karaktert, ezzel jelezve az adatfeltoltes veget!" << endl;
+    cout << "Kerem adja meg a napokon mert Celsius fok ertekeket szokozzel, vagy enterrel elvalasztva, majd adjon meg barmilyen nem szam karaktert, ezzel jelezve az adatfeltoltes veget!" << endl;
     float degree;
     cin >> degree;
     while(!cin.fail()) {
@@ -130,15 +134,18 @@ void ReadFromConsole(vector<float> &t)
     cin.ignore(10000,'\n');
 }
 
+//Feladat:      Kiírja az adatokat tartalmazó vektort olvasható formában a console-ra
+//Bemenõ adat:  vector<float> t
 void WriteVector(vector<float> &t)
 {
-    // Ha a vektorban nincsen semmi, nem írunk ki semmit
-    if(t.size()<1)
-        return;
+    cout << endl << "A megadott homersekleteken (<";
+    if((int)t.size() >0) {
+        cout << t[0];
+        for(int i=1; i< (int)t.size(); ++i)
+            cout << ", " << t[i];
+    }
 
-    cout << t[0];
-    for(int i=1; i< (int)t.size(); ++i)
-        cout << ", " << t[i];
+    cout << ">) ";
 }
 
 //Feladat:      Megszámolja hányszor követett 0°C-ot negatív érték
@@ -147,9 +154,6 @@ void WriteVector(vector<float> &t)
 //Kimenõ adat:  int c - a válasz visszatérési értékként
 int CountDays(const vector<float> &t)
 {
-    //Kevesebb mint 2 nap esetén, 0-szor követhetett fagyponti nap után fagypont alatti napot
-    if(t.size()<2) return 0;
-
     int c=0;
     for(int i=1; i<(int)t.size(); ++i)
         if(t[i]<0 && t[i-1]==0)
