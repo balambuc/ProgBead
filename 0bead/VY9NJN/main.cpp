@@ -4,7 +4,7 @@
 //mail:          bardosi.bence@gmail.com
 //csoport:       A csoport
 //Feladat:       0.beadandó/4.feladat
-//               Hányszor mértünk 0 Celsius fokot úgy, hogy másnap fagypont alatti hömérséklet volt?
+//               mértünk 0 Celsius fokot úgy, hogy másnap fagypont alatti hömérséklet volt?
 
 #include <iostream>
 #include <fstream>
