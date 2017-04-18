@@ -16,8 +16,8 @@
 \DeclareMathOperator*{\search}{SEARCH}
 \DeclareMathOperator*{\mindSearch}{\forall SEARCH}
 
-\title{”Programozás”\\ beadandó feladat:\\ 4. feladat}
-\date{2017-03-06}
+\title{”Programozás”\\ beadandó feladat:\\ 9. feladat}
+\date{2017-04-18}
 \author{Készítette: Bárdosi Bence\\ Neptun-azonosító: VY9NJN\\ E-mail: bardosi.bence@gmail.com}
 
 \renewcommand*\contentsname{Tartalom}
@@ -135,48 +135,70 @@
       \end{table}
       \includegraphics[width=\textwidth]{fgv}
     \subsection{Tesztelés}
-      \subsubsection{A feladat specifikációjára épülő (fekete doboz) tesztesetek:}
+      \subsubsection{A programozási tételekre épülő (szürke doboz) tesztesetek:}
       \begin{table}[H]
-        \caption*{}
+        \caption*{Külső programozási tétel (lin.ker)}
         \begin{tabular*}{\textwidth}{ll}
           \toprule
-          \textbf{Megszámlálás tétel} tesztesetei: & \\
           \textbf{intervallum hossza} szerint: & \\
-          1. \textit{nulla} hosszú: & Egyetlen nap sincs \\
-          & \quad be1.txt: [] - válasz: 0 \\
-          2. \textit{egy} hosszú: & Egyetlen nap \\
-          & \quad be2.txt: [5.2] - válasz: 0 \\
-          3. \textit{kettő} hosszú: & Kettő, a feltételnek eleget nem tevő nap \\
-          & \quad be3.txt: [5.2, 0] - válasz: 0 \\
-          & Kettő, a feltételnek eleget tevő nap \\
-          & \quad be3.txt: [0, -2] - válasz: 1 \\
-          4. \textit{több} hosszú: & Több nap \\
-          & \quad be5.txt: [0, -2, 0, 5, 6, 0, -0.5] - válasz: 2 \\
+          1. \textit{nulla} hosszú: & 0 város, 0 madár \\
+          & \quad be11.txt - válasz: Hamis \\
+          2. \textit{egy} város: & van "0" madár  \\
+          & \quad be12.txt - válasz: Hamis \\
+          3. \textit{egy} város: & nincs "0" madár \\
+          & \quad be13.txt - válasz: Igaz \\
+          4. \textit{több} város: &  \\
+          & \quad be14.txt - válasz: Igaz \\
           \textbf{intervallum eleje} szerint: & \\
-          & Sorozat elején található csak a feltételnek megfelelő nappár \\
-          & \quad be6.txt: [0, -2, 0, 5, 6, 0] - válasz: 1 \\
+          & Csak az első városban fordult elő az összes madárból \\
+          & \quad be15.txt - válasz: Igaz \\
           \textbf{intervallum vége} szerint: & \\
-          & Sorozat végén található csak a feltételnek megfelelő nappár \\
-          & \quad be7.txt: [0, 2, 0, 5, 6, 0, -2] - válasz: 1 \\
+          & Csak az utolsó városban fordult elő az összes madárból \\
+          & \quad be16.txt - válasz: Igaz \\
           \textbf{tételre jellemző esetek} szerint: & \\
-          1. Egyetlen megfelelő nappár van: & \\
-          & \quad be7.txt: [0, 2, 0, 5, 6, 0, -2] - válasz: 1 \\
-          2. Nincs megfelelő nappár: & \\
-          & \quad be8.txt: [0, 1, 2, 3, 4] - válasz: 0 \\
-          3. Egy "0" napot több "negatív" nap követ: & \\
-          & \quad be9.txt: [1, 2, 0, -1, -2, -1] - válasz: 0 \\
+          1. Több város, több madár & mindegyik városban előfordult mind: \\
+          & \quad be17.txt - válasz: Igaz \\
+          2. Több város, több madár & egy városban előfordult mind: \\
+          & \quad be18.txt - válasz: Igaz \\
+          3. Több város, több madár & egy városban sem fordult elő mind: \\
+          & \quad be19.txt - válasz: Hamis \\
+          \bottomrule
+        \end{tabular*}
+      \end{table}
+      \begin{table}[H]
+        \caption*{Belső programozási tétel (opt.lin.ker)}
+        \begin{tabular*}{\textwidth}{ll}
+          \toprule
+          \textbf{intervallum hossza} szerint: & \\
+          1. \textit{nulla} hosszú: & 0 madár \\
+          & \quad be21.txt - válasz: Igaz \\
+          2. \textit{egy} "0" madár & \\
+          & \quad be22.txt - válasz: Hamis \\
+          3. \textit{egy} nem "0" madár &\\
+          & \quad be23.txt - válasz: Igaz \\
+          4. \textit{több} madár: &  \\
+          & \quad be24.txt - válasz: Igaz \\
+          \textbf{intervallum eleje} szerint: & \\
+          & Csak az első madár "0" \\
+          & \quad be25.txt - válasz: Hamis \\
+          \textbf{intervallum vége} szerint: & \\
+          & Csak az utolsó madár "0" \\
+          & \quad be26.txt - válasz: Hamis \\
+          \textbf{tételre jellemző esetek} szerint: & \\
+          1. Több madár, mind nem "0": & \\
+          & \quad be27.txt - válasz: Igaz \\
+          2. Több madár, egy "0": & \\
+          & \quad be28.txt - válasz: Hamis \\
+          3. Több madár, több 0: & \\
+          & \quad be29.txt - válasz: Hamis \\
           \bottomrule
         \end{tabular*}
       \end{table}
     \subsubsection{A megoldó programra épülő (fehér doboz) tesztesetek:}
       \begin{itemize}
         \item Hibás vagy nem létező állománynév megadása.
-        \item Állomány nevének megadása parancssorból.
-        \item Olyan állomány olvasása, ahol egy sorban több érték is található egyetlen illetve több szóközzel és/vagy tabulátor jellel elválasztva (be10.txt).
-        \item Olyan állomány olvasása, ahol minden érték külön sorban van (be9.txt).
-        \item Olyan állomány olvasása, ahol az utolsó sort nem zárja sorvége jel, és éppen ennek a sornak a tartalma határozza meg az eredményt (adat: [1, 2, 3, 0, -1] – válasz: 1) (be11.txt).
-        \item Főprogram ciklusának ellenőrzése: olyan bemenő adatokkal, amelyekre a ciklus egyszer sem fut le (Pl: be1.txt), pontosan egyszer fut le (Pl: be3.txt), vagy többször lefut(Pl:be5.txt).
+        \item Menü választás tesztelése.
+        \item Beolvasás mindkét módozatána tesztelése.
+        \item Hibás adatok beolvasásának tesztelése.
       \end{itemize}
-
-
 \end{document}
