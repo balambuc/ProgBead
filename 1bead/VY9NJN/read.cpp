@@ -40,7 +40,7 @@ bool read (vector<vector<int> > &adat)
 
 //Feladat:      Természetes számokat tartalmazó mátrix (vector<vector>) feltöltése szöveges állományból
 //Tevékenység:  Megnyitja a megadott szöveges állományt (sikertelen kísérlet esetén hibát jelez)
-//              majd a fájlból beolvassa a városok, a faok, majd az egyedek számát
+//              majd a fájlból beolvassa a városok, a fajok, majd az egyedek számát
 //Kimenõ adat:  vector<vector<int>> adat
 //              bool ok - sikerült-e az állomány megnyitása (visszatérési értékként)
 bool from_file (const string fname, vector<vector<int> > &adat)

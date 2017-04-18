@@ -9,7 +9,7 @@
 using namespace std;
 
 //Feladat:      Megadja, hogy van-e olyan város ahol minden madár előfordult-e
-//Tevékenység:  Lineáris keresés segítségével, megadja, hogy az adott mátrixban létezik-e megfelelő tulajdonságú nap
+//Tevékenység:  Lineáris keresés segítségével, megadja, hogy az adott mátrixban létezik-e megfelelő tulajdonságú város
 //Bemenõ adat:  vector<vector<int>> adat
 //Kimenõ adat:  bool l - a válasz visszatérési értékként
 bool madar(const vector<vector<int> > &adat)
@@ -27,16 +27,16 @@ bool madar(const vector<vector<int> > &adat)
 
 //Feladat:      Megadja, hogy az adott városban előfordult-e minden madárfajból
 //Tevékenység:  Optimista lineáris keresés segítségével, megadja, hogy az adott tömbben minden madárfajból előfordul-e legalább 1
-//Bemenõ adat:  vector<vector<int>> adat
+//Bemenõ adat:  vector<int> sor
 //Kimenõ adat:  bool l - a válasz visszatérési értékként
 bool mind(const vector<int> &sor)
 {
     bool l = true;
-    unsigned int i = 0;
+    unsigned int j = 0;
 
-    while(l && i < sor.size()) {
-        l = (sor[i] > 0);
-        ++i;
+    while(l && j < sor.size()) {
+        l = (sor[j] > 0);
+        ++j;
     }
 
     return l;

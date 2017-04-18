@@ -7,39 +7,14 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{float}
-\usepackage{tikz}
 \usepackage{color}
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{struktex}
 
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-\definecolor{light-gray}{gray}{0.95}
-
-\lstset
-{
-    language=C++,
-    backgroundcolor=\color{light-gray},
-    basicstyle=\ttfamily\linespread{1.15}\footnotesize,
-    numbers=left,
-    stepnumber=1,
-    showstringspaces=false,
-    tabsize=1,
-    breaklines=true,
-    breakatwhitespace=false,
-    commentstyle=\color{mygreen},
-    keywordstyle=\color{blue},
-    stringstyle=\color{mymauve},
-}
-
-\usetikzlibrary{shapes.geometric, arrows}
-\tikzstyle{box} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black]
-\tikzstyle{arrow} = [thin, -, >=stealth]
-
-\graphicspath{{./IMG/}}
+\DeclareMathOperator*{\search}{SEARCH}
+\DeclareMathOperator*{\mindSearch}{\forall SEARCH}
 
 \title{”Programozás”\\ beadandó feladat:\\ 4. feladat}
 \date{2017-03-06}
@@ -63,80 +38,102 @@
     Madarak életének kutatásával foglalkozó szakemberek n különböző településen m különböző madárfaj előfordulását tanulmányozzák. Egy adott időszakban megszámolták, hogy az egyes településen egy madárfajnak hány egyedével találkoztak.
     Volt-e olyan település, ahol mindegyik madárfaj előfordult?
     \subsection{Specifikáció}
-    \begin{align*}
-      \mathbf{A=}\, \left ( adat: \mathbb{N}^{n x m} , l: \mathbb{L} \right )
-    \end{align*}
-    \begin{align*}
-      \mathbf{Ef=}\, \left ( adat=adat' \right )
-    \end{align*}
-    \begin{align*}
-      \mathbf{Uf=}\, \left ( Ef \wedge (l,\_)=\sum_{i=1}^n mind(adat[i]) \right )
-    \end{align*}
-    \begin{align*}
-      \mathbf{ahol\, mind(adat[i]):}
-    \end{align*}
-    \begin{align*}
-      \mathbf{A=}\, \left ( sor: adat[i] (\mathbb{N}^{m}) , l: \mathbb{L} \right )
-    \end{align*}
-    \begin{align*}
-      \mathbf{Ef=}\, \left ( sor=sor' \right )
-    \end{align*}
-    \begin{align*}
-      \mathbf{Uf=}\, \left ( Ef \wedge l=\forall \sum_{i=1}^m sor[i]>0 \right )
-    \end{align*}
+        \begin{align*}
+          \mathbf{A=}\, \left ( adat: \mathbb{N}^{n x m} , l: \mathbb{L} \right )
+        \end{align*}
+        \begin{align*}
+          \mathbf{Ef=}\, \left ( adat=adat' \right )
+        \end{align*}
+        \begin{align*}
+          \mathbf{Uf=}\, \left ( Ef \wedge (l,\_)=\search_{i=1}^n mind(i) \right )
+        \end{align*}
+        \begin{align*}
+          \mathbf{ahol}\, mind(i): \mathbb{N} \rightarrow \mathbb{L}
+        \end{align*}
+        \begin{align*}
+          \mathbf{\acute{e}s}\, \forall i \in [1..n]: mind(i)=\mindSearch_{j=1}^{m} adat[i,j]>0
+        \end{align*}
     \subsection{Algoritmus}
       A feladatot a lineáris keresés, az alfeladatot az optimista lineáris keresés programozási tételeire vezetjük vissza.
-      \begin{table}[H]
-        \caption*{Lineáris keresés}
-        \begin{tabular*}{0.55\textwidth}{ccc}
-          \toprule
-          Tétel & & Feladat \\
-          \midrule
-          $m$ & $\leftarrow$ & 1 \\
-          $n$ & $\leftarrow$ & n \\
-          $ind$ & $\leftarrow$ & $\_$ \\
-          $\beta (i)$ & $\leftarrow$ & $\sum_{i=1}^n mind(adat[i])$ \\
-          \bottomrule
-        \end{tabular*}
-      \end{table}
-      \begin{table}[H]
-        \caption*{Optimista lineáris keresés}
-        \begin{tabular*}{0.55\textwidth}{ccc}
-          \toprule
-          Tétel & & Feladat \\
-          \midrule
-          $m$ & $\leftarrow$ & 1 \\
-          $n$ & $\leftarrow$ & m \\
-          $\beta (i)$ & $\leftarrow$ & $\forall \sum_{i=1}^m sor[i]>0$ \\
-          \bottomrule
-        \end{tabular*}
-      \end{table}
-      \input{./structs/madar}
+      \begin{tabular}{cc}
+          \begin{minipage}{.5\linewidth}
+            \begin{tabular}{ccc}
+              & & \\
+              & Lin. ker. & \\
+              \midrule
+              Tétel & & Feladat \\
+              \midrule
+              $m$ & $\leftarrow$ & 1 \\
+              $n$ & $\leftarrow$ & n \\
+              $ind$ & $\leftarrow$ & $\_$ \\
+              $\beta (i)$ & $\leftarrow$ & $mind(i)$ \\
+              \midrule
+              & & \\
+            \end{tabular}
+            \input{./structs/lk}
+          \end{minipage} &
+
+          \begin{minipage}{.5\linewidth}
+            \begin{tabular}{ccc}
+              & & \\
+              & Opt. lin. ker. & \\
+              \midrule
+              Tétel & & Feladat \\
+              \midrule
+              $m$ & $\leftarrow$ & 1 \\
+              $n$ & $\leftarrow$ & m \\
+              $i$ & $\leftarrow$ & $j$ \\
+              $\beta (i)$ & $\leftarrow$ & $adat[i,j]>0$ \\
+              \midrule
+              & &  \\
+            \end{tabular}
+            \input{./structs/olk}
+          \end{minipage}
+      \end{tabular}
     \subsection{Implementáció}
         \subsubsection{Adattípusok megvalósítása}
-        A kódoláskor a t tömböt \texttt{vector<float>}-ként deklaráljuk, amelynek mérete \texttt{t.size()} alakban érhető el. Mivel a vektor 0-tól indexelődik, azért a tervbeli ciklus nem a \texttt{2..n}, hanem az 1..n-1 intervallumot, pontosabban a \texttt{1..t.size()-1} intervallumot futja be, aminek következtében a struktogramm kódja az alábbi lesz:
-        \begin{lstlisting}
-        int c=0;
-        for(int i=1; i<(int)t.size(); ++i)
-            if(t[i]<0 && t[i-1]==0)
-                ++c;}
-        \end{lstlisting}
+        A tervben szereplő mátrixot \texttt{vector<vector<int>>}-ként deklaráljuk. Mivel a vektor 0-tól indexelődik, azért a tervbeli ciklusok indextartományai a \texttt{0..n–1} és a \texttt{0..m–1} intervallumra módosulnak, ahol a \texttt{n}-re \texttt{t.size()} alakban, \texttt{m}-re pedig \texttt{t[i].size()} alakban hivatkozhatunk.
         \subsubsection{Bemenő adatok formája}
-        A bemenő adatokat egy szöveges állományból kell a tömbbe bemásolni. Az állományban a megadott értékeket szóközökkel, tabulátor jelekkel vagy sorvége jelekkel elválasztva kell beírni. Az állomány minden sorát sorvége jel zárja le.
-      \subsubsection{Függvények kapcsolódási szerkezete}
-        \begin{tikzpicture}[node distance=2cm]
-          \node (write) [box] {WriteVector(t)};
-          \node (fo) [box, above of=write] {main()};
-          \node (beolv) [box, left of=write, xshift=-2cm] {RadData(argc, argv, t)};
-          \node (cnt) [box, right of=write, xshift=2cm] {CountDays(t)};
-          \node (file) [box, below of=beolv, xshift=-2cm] {ReadFromFile(fname, t)};
-          \node (cons) [box, right of=file, xshift=2cm] {ReadFromConsole(t)};
-          \draw [arrow] (fo) -- (write);
-          \draw [arrow] (fo) -- (beolv);
-          \draw [arrow] (fo) -- (cnt);
-          \draw [arrow] (beolv) -- (file);
-          \draw [arrow] (beolv) -- (cons);
-        \end{tikzpicture}
+        Az adatokat be lehet olvasni egy szöveges állományból vagy meg lehet adni billentyűzetről. A program először megkérdezi az adatbevitel módját, majd a szöveges állományból való olvasást választva bekéri az állomány nevét. A billentyűzetről vezérelt adatbevitelt a program párbeszéd-üzemmódban irányítja, és azt megfelelő adat-ellenőrzésekkel vizsgálja. A szöveges állomány formája kötött, arról feltesszük, hogy helyesen van kitöltve, ezért ezt külön nem ellenőrizzük. Az első sor a városok és a madárfajok számát tartalmazza, szóközökkel vagy tabulátor jelekkel elválasztva. Ezt követően következnek a városonként megfigyelt madárfajok egyedeinek száma kötött sorrendben. A fájlt egy sorvége jel zárja.
+      \subsubsection{Program váz}
+      A program több állományból áll. A read csomag (\texttt{read.h, read.cpp}) felel az adatok helyes beolvasásáról és azok ellenőrzéséről. A "madar" csomag (\texttt{madar.h, madar.cpp}) felel feladat megoldásáért. Végül a "teszt" csomag (\texttt{catch.hpp, test.h, test.cpp}) az egységteszt megszervezéséért felel. A csomagokban található függvények/állományok feladatai az alábbi táblázatokból olvashatók.
+      \begin{table}[H]
+        \caption*{Read csomag}
+        \begin{tabular}{l|l}
+          \toprule
+          Függvény & Feladat \\
+          \midrule
+          read & Megkérdezi a felhasználótól, hogy milyen módon kívánja az adatokat bevinni.\\
+          from\_file &  Megnyitja a megadott szöveges állományt,és beolvassa azadatokat.\\
+          from\_console & Párbeszédes formában bekéri a felhasználótól az adatokat.\\
+          safecin & Ellenőrzi, hogy a kapott adat természetes szám-e. Hiba esetén értesíti a felhasználót.\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+      \begin{table}[H]
+        \caption*{Madar csomag}
+        \begin{tabular}{l|l}
+          \toprule
+          Függvény & Feladat \\
+          \midrule
+          madar & Megadja, hogy az adott mátrixban létezik-e megfelelő tulajdonságú város.\\
+          mind &  Megadja, hogy az adott tömbben minden madárfajból előfordul-e legalább 1.\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+      \begin{table}[H]
+        \caption*{Test csomag}
+        \begin{tabular}{l|l}
+          \toprule
+          Állomány & Feladat \\
+          \midrule
+          test.h & Tartalmazza azt a flag-et, amely megszervezi, hogy programfutás, vagy egységteszt forduljon.\\
+          test.cpp & Egységteszteket tartalmazó állomány\\
+          catch.hpp & Külső könyvtár, mely megszervezi az automatikus egységtesztet.\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+      \includegraphics[width=\textwidth]{fgv}
     \subsection{Tesztelés}
       \subsubsection{A feladat specifikációjára épülő (fekete doboz) tesztesetek:}
       \begin{table}[H]

@@ -18,7 +18,7 @@ TEST_CASE("intervallum hossza 0", "nincs tantargy")
     vector<vector<int> > adat;
     int n,m;
 
-    from_file("t0.txt", adat);
+    from_file("../Tesztesetek/t0.txt", adat);
     CHECK(!madar(adat));
 }
 
